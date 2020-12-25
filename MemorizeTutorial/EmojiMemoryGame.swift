@@ -1,0 +1,31 @@
+import SwiftUI
+
+// ViewModel
+class EmojiMemoryGame {
+    // private(set) works like a glassdoor, where others can see inside EmojiMemoryGame but unable to access it
+    // this in a way to do an inline method
+    // We can leave out the type as swift can infer the type from the method in memory game
+    // The _ means it can be anything because it is unused
+    // We can "remove" the comma as the inline method is the last argument, so we can just leave it in the {} instead
+    private var model: MemoryGame<String> = EmojiMemoryGame.createMemoryGame()
+    
+    static func createMemoryGame() -> MemoryGame<String> {
+        // this refers to a constant array
+        let emojis: Array<String> = ["👻", "🎃"]
+        return MemoryGame<String>(numberOfPairsOfCards: 2) {pairIndex in
+            return emojis[pairIndex]
+        }
+    }
+    
+    // MARK: - Access to the Model
+    
+    var cards: Array<MemoryGame<String>.Card> {
+        return model.cards
+    }
+    
+    // MARK: - Intent(s)
+    
+    func choose(card: MemoryGame<String>.Card) {
+        model.choose(card: card);
+    }
+}
