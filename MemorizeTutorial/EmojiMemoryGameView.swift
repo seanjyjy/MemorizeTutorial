@@ -84,6 +84,7 @@ struct CardView: View {
         }
     }
     
+    
     // MARK: - Drawing Constants
     
     // we can use _ in this case so that there isnt a need to declare the "name" when using the function
