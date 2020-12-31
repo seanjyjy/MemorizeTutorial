@@ -1,9 +1,11 @@
 import Foundation
 
 struct MemoryGame<CardContent> where CardContent: Equatable {
-    var cards: Array<Card>
+    // private(Set) is only making the SET method to be private, so others cannot access and set it
+    // however reading cards is still okay
+    private(set) var cards: Array<Card>
     
-    var indexOfTheOneAndOnlyFaceUpCard: Int? {
+    private var indexOfTheOneAndOnlyFaceUpCard: Int? {
         get { cards.indices.filter { cards[$0].isFaceUp }.only }
         set {
             for index in cards.indices {
@@ -29,7 +31,7 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
     }
     
     init(numberOfPairsOfCards: Int, cardContentFactory: (Int) -> CardContent) {
-        cards = Array<Card>() // this is an empty array
+        cards = Array<Card>() // this is an empty array or can use [Card]()
         for pairIndex in 0..<numberOfPairsOfCards {
             let content = cardContentFactory(pairIndex) // var is for varying. Let is for variable that doesnt vary (different from js)
             cards.append(Card(content: content, id: pairIndex * 2))

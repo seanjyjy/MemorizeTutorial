@@ -10,7 +10,7 @@ class EmojiMemoryGame: ObservableObject { // ObservableObject is only for class
     // We can "remove" the comma as the inline method is the last argument, so we can just leave it in the {} instead
     @Published private var model: MemoryGame<String> = EmojiMemoryGame.createMemoryGame()
     
-    static func createMemoryGame() -> MemoryGame<String> {
+    private static func createMemoryGame() -> MemoryGame<String> {
         // this refers to a constant array
         let emojis: Array<String> = ["👻", "🎃", "🕷"]
         return MemoryGame<String>(numberOfPairsOfCards: emojis.count) {pairIndex in
@@ -21,7 +21,7 @@ class EmojiMemoryGame: ObservableObject { // ObservableObject is only for class
     // MARK: - Access to the Model
     
     var cards: Array<MemoryGame<String>.Card> {
-        return model.cards
+        model.cards
     }
     
     // MARK: - Intent(s)
