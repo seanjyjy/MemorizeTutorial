@@ -6,13 +6,11 @@ struct EmojiMemoryGameView: View {
     // It doesnt re-render the whole thing because the Cards are identifiable, hence it can check
     // if somethign changes
     var body: some View {
-        HStack {
-            ForEach(viewModel.cards) {
-                card in
-                CardView(card: card).onTapGesture {
-                    self.viewModel.choose(card: card)
-                }
-            }
+        Grid(viewModel.cards) {
+            card in
+            CardView(card: card).onTapGesture {
+                self.viewModel.choose(card: card)
+            }.padding(5)
         }.padding().foregroundColor(Color.orange)
     }
 }
@@ -51,7 +49,9 @@ struct CardView: View {
                 RoundedRectangle(cornerRadius: cornerRadius).stroke(lineWidth: edgeLineWidth)
                 Text(card.content)
             } else {
-                RoundedRectangle(cornerRadius: cornerRadius).fill()
+                if !card.isMatched {
+                    RoundedRectangle(cornerRadius: cornerRadius).fill()
+                }
             }
         }
         .font(Font.system(size: fontSize(size)))
